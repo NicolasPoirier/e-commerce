@@ -1,0 +1,27 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/app.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node app/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicolasPoirier/e-commerce.git"
+  },
+  "author": "Nicolas Poirier",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/NicolasPoirier/e-commerce/issues"
+  },
+  "homepage": "https://github.com/NicolasPoirier/e-commerce#readme",
+  "devDependencies": {
+    "jest": "~26.6.3"
+  },
+  "dependencies": {
+    "dotenv": "~8.2.0",
+    "fastify": "~3.10.1"
+  }
+}
