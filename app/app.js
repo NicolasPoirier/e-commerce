@@ -4,7 +4,7 @@ const dependencyContainer = require("./di/dependencyContainer");
 const Server = require("./webservice/Server");
 const config = require('./config/config');
 
-new Server(config.port, config.host, dependencyContainer).start();
+new Server(config.port, config.host, config.jwtSecret, config.jwtExpirationInSecond, dependencyContainer).start();
 
 process.on("unhandledRejection", e => {
   console.log(`Uncaught Rejection: ${e.message}`);

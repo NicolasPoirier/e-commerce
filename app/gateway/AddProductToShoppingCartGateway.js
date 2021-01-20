@@ -11,6 +11,10 @@ module.exports = class {
     this.#dataSource = dataSource;
   }
 
+  async getUserRoles(userId) {
+    return await this.#dataSource.getUserRolesByUserId(userId);
+  }
+
   async getUserShoppingCart(userId) {
     const inMemoryShoppingCart = await this.#dataSource.getShoppingCartByUserId(userId);
     if (inMemoryShoppingCart) {
@@ -20,11 +24,11 @@ module.exports = class {
     }
   }
 
-  async saveUserShoppingCart(userId, shoppingCart) {
-    return await this.#dataSource.saveShoppingCart(await toInMemoryShoppingCart(userId, shoppingCart));
+  async saveUserShoppingCart(shoppingCart) {
+    return await this.#dataSource.saveShoppingCart(await toInMemoryShoppingCart(shoppingCart));
   }
 
-  async getProductById(productId) {
+  async getProduct(productId) {
     return await this.#dataSource.getProductById(productId);
   }
 };

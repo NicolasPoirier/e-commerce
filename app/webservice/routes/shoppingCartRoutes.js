@@ -2,24 +2,32 @@
 
 module.exports = async function (fastify, options) {
 
-  const addProductInShoppingCartUseCase = options.dependencyContainer.addProductInShoppingCartUseCase;
+  const addProductToShoppingCartUseCase = options.dependencyContainer.addProductToShoppingCartUseCase;
   const getUserShoppingCartUseCase = options.dependencyContainer.getUserShoppingCartUseCase;
 
   fastify.post(
     '/shopping-carts/:userId/items',
+    {
+      preValidation: [fastify.authenticate]
+    },
     async (request, reply) => {
-      const userId = request.params.userId;
+      const shoppingCartUserId = request.params.userId;
+      const authenticatedUserId = request.user.username;
       const item = JSON.parse(request.body);
-      await addProductInShoppingCartUseCase.execute(userId, item.productId, item.quantity);
+      await addProductToShoppingCartUseCase.execute(authenticatedUserId, shoppingCartUserId, item.productId, item.quantity);
       reply.send();
     }
   );
 
   fastify.get(
     '/shopping-carts/:userId',
+    {
+      preValidation: [fastify.authenticate]
+    },
     async (request) => {
-      const userId = request.params.userId;
-      return await getUserShoppingCartUseCase.execute(userId);
+      const shoppingCartUserId = request.params.userId;
+      const authenticatedUserId = request.user.username;
+      return await getUserShoppingCartUseCase.execute(authenticatedUserId, shoppingCartUserId);
     }
   );
 };

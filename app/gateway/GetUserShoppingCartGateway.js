@@ -10,6 +10,10 @@ module.exports = class {
     this.#dataSource = dataSource;
   }
 
+  async getUserRoles(userId) {
+    return await this.#dataSource.getUserRolesByUserId(userId);
+  }
+
   async getUserShoppingCart(userId) {
     const inMemoryShoppingCart = await this.#dataSource.getShoppingCartByUserId(userId);
     if (inMemoryShoppingCart) {

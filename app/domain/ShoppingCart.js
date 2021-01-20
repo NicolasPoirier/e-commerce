@@ -5,10 +5,12 @@ const IllegalArgumentError = require('../error/IllegalArgumentError');
 
 module.exports = class {
 
+  userId;
   items;
   totalPrice;
 
-  constructor(items = []) {
+  constructor(userId, items = []) {
+    this.userId = userId;
     this.items = items;
     this.refreshTotalPrice();
   }

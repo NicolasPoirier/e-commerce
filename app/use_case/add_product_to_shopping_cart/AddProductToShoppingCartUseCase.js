@@ -1,23 +1,32 @@
 'use strict';
 
 const ShoppingCart = require('../../domain/ShoppingCart');
+const canAddProductToShoppingCartAuthorization = require('../../domain/authorization/canAddProductToShoppingCartAuthorization');
+const UnauthorizedUserError = require('../../error/UnauthorizedUserError');
 
 module.exports = class {
 
-  #addProductInShoppingCartGateway;
+  #addProductToShoppingCartGateway;
 
-  constructor(addProductInShoppingCartGateway) {
-    this.#addProductInShoppingCartGateway = addProductInShoppingCartGateway;
+  constructor(addProductToShoppingCartGateway) {
+    this.#addProductToShoppingCartGateway = addProductToShoppingCartGateway;
   }
 
-  async execute(userId, productId, quantity) {
+  async execute(authenticatedUserId, shoppingCartUserId, productId, quantity) {
     const shoppingCart = 
-      await this.#addProductInShoppingCartGateway.getUserShoppingCart(userId) 
-      || new ShoppingCart();
-    const product = await this.#addProductInShoppingCartGateway.getProductById(productId);
+      await this.#addProductToShoppingCartGateway.getUserShoppingCart(shoppingCartUserId) 
+      || new ShoppingCart(shoppingCartUserId);
 
-    shoppingCart.addProduct(product, quantity);
+    const userRoles = await this.#addProductToShoppingCartGateway.getUserRoles(authenticatedUserId);
 
-    await this.#addProductInShoppingCartGateway.saveUserShoppingCart(userId, shoppingCart);
+    if(canAddProductToShoppingCartAuthorization({id: authenticatedUserId, roles: userRoles}, shoppingCart)) {
+      const product = await this.#addProductToShoppingCartGateway.getProduct(productId);
+
+      shoppingCart.addProduct(product, quantity);
+  
+      await this.#addProductToShoppingCartGateway.saveUserShoppingCart(shoppingCart);
+    } else {
+      throw new UnauthorizedUserError("Cannot add product to shopping cart");
+    }
   }
 };
