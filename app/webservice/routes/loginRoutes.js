@@ -33,7 +33,6 @@ module.exports = async function (fastify, options) {
       const token = fastify.jwt.sign(
         { username: userLoginInformation.username }
       );
-      console.log({ token: token, roles: userLoginInformation.roles });
       return { token: token, roles: userLoginInformation.roles };
     }
   );
