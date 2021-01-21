@@ -5,7 +5,7 @@ module.exports = fp(async function(fastify) {
     try {
       await request.jwtVerify();
     } catch (err) {
-      reply.send(err);
+      reply.code(401).send();
     }
   });
 });
