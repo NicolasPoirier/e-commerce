@@ -1,9 +1,9 @@
 import fastify from 'fastify';
-import addProductInUserShoppingCartRoute from './route/shoppingCart/addProductInUserShoppingCart.route';
+import addProductToUserShoppingCartRoute from './route/shoppingCart/addProductToUserShoppingCart.route';
 
 const server = fastify();
 
-server.route(addProductInUserShoppingCartRoute);
+server.route(addProductToUserShoppingCartRoute);
 
 // Run the server!
 const start = async () => {

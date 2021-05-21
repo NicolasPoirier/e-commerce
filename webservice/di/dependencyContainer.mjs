@@ -1,7 +1,7 @@
-import addProductUserInShoppingCartGateway from 'gateway/shoppingCart/addProductInUserShoppingCart/addProductInUserShoppingCartMonolith.gateway';
-import addProductInUserShoppingCartUsecase from 'usecase/shoppingCart/addProductInUserShoppingCart/addProductInUserShoppingCart.usecase';
+import addProductUserInShoppingCartGateway from 'gateway/shoppingCart/addProductToUserShoppingCart/addProductToUserShoppingCartMonolith.gateway';
+import addProductToUserShoppingCartUsecase from 'usecase/shoppingCart/addProductToUserShoppingCart/addProductToUserShoppingCart.usecase';
 
-export const addProductInUserShoppingCart = addProductInUserShoppingCartUsecase({
+export const addProductToUserShoppingCart = addProductToUserShoppingCartUsecase({
   gateway: addProductUserInShoppingCartGateway,
 });
 

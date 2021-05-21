@@ -1,6 +1,6 @@
-import { addProductInUserShoppingCart } from '../../di/dependencyContainer';
+import { addProductToUserShoppingCart } from '../../di/dependencyContainer';
 
-const addProductInUserShoppingCartRoute = {
+const addProductToUserShoppingCartRoute = {
   method: 'POST',
   path: '/shopping-carts/:shoppingCartUserId/products',
   async handler(request, reply) {
@@ -10,7 +10,7 @@ const addProductInUserShoppingCartRoute = {
     const { shoppingCartUserId } = request.params;
     const userId = request.user.id; // From a JWT
 
-    await addProductInUserShoppingCart({
+    await addProductToUserShoppingCart({
       userId, shoppingCartUserId, productId, quantity,
     });
 
@@ -18,4 +18,4 @@ const addProductInUserShoppingCartRoute = {
   },
 };
 
-export default addProductInUserShoppingCartRoute;
+export default addProductToUserShoppingCartRoute;

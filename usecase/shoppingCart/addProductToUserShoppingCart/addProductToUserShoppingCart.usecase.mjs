@@ -1,13 +1,13 @@
 import isProductQuantityInStock from 'domain-model/isProductQuantityInStock';
-import canAddProductInUserShoppingCart from './canAddProductInUserShoppingCart';
+import canAddProductToUserShoppingCart from './canAddProductToUserShoppingCart';
 
-export default function addProductInUserShoppingCartUsecase({ gateway }) {
+export default function addProductToUserShoppingCartUsecase({ gateway }) {
   return async function execute({
     userId, shoppingCartUserId, productId, quantity,
   }) {
     const userRoles = await gateway.getUserRoles({ userId });
 
-    if (!canAddProductInUserShoppingCart({
+    if (!canAddProductToUserShoppingCart({
       user: { id: userId, roles: userRoles },
       shoppingCartUserId,
     })) {
