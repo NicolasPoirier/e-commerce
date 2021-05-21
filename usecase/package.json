@@ -1,0 +1,16 @@
+{
+  "name": "usecase",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "tape -r 'esm' test/**/*.test.js"
+  },
+  "author": "Nicolas Poirier",
+  "license": "ISC",
+  "dependencies": {
+    "domain-model": "file:../domain"
+  },
+  "devDependencies": {
+    "tape": "~5.2.2"
+  }
+}
