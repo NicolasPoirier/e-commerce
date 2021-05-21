@@ -1,0 +1,13 @@
+{
+  "name": "domain-model",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "tape -r 'esm' test/**/*.test.js"
+  },
+  "author": "Nicolas Poirier",
+  "license": "ISC",
+  "devDependencies": {
+    "tape": "~5.2.2"
+  }
+}
